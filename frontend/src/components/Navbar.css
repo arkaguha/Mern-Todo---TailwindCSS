@@ -1,0 +1,44 @@
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--navbar-bg);
+  color: var(--text);
+  border-bottom: 1px solid var(--navbar-border);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.nav-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-btn {
+  background: transparent;
+  color: inherit; /* icons inherit color (lucide uses currentColor) */
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.nav-btn:hover {
+  background: var(--button-hover);
+}
+
+.nav-btn:active {
+  transform: scale(0.98);
+}
