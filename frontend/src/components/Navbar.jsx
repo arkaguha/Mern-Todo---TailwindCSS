@@ -2,35 +2,58 @@
 import { Moon, Sun, LogIn, LogOut, User } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import "./Navbar.css";
+import useAuth from "../contexts/UseAuth";
+import { useNavigate } from "react-router-dom";
+import { useLoader } from "../contexts/UseLoader";
 
-export default function Navbar({ user, logout }) {
+export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { showLoader, hideLoader } = useLoader();
 
-  // fake login state (replace with auth logic later)
+  function logout() {
+    try {
+      showLoader();
+      localStorage.removeItem("token");
+    } catch (error) {
+      console.log("error nav 18: ", error);
+    } finally {
+      hideLoader();
+    }
+    return navigate("/login");
+  }
+
   const isLoggedIn = user;
   const userName = isLoggedIn ? user.name : null;
 
   return (
-    <nav className={`navbar ${theme}`}>
-      <div className="nav-left">
-        <h2 className="logo">ToDo App</h2>
+    <nav className="fixed w-screen top-0  bg-amber-200  flex justify-between px-6 py-4 items-center shadow-2xl shadow-amber-100">
+      <div className="">
+        <h2 className="text-3xl ">todos</h2>
       </div>
-      <div className="nav-right">
+      <div className="flex flex-row gap-3 ">
         {isLoggedIn ? (
           <>
-            <button className="nav-btn">
+            <button className="flex flex-row items-center gap-1">
               <User size={16} /> {userName}
             </button>
-            <button onClick={logout} className="nav-btn">
+            <button
+              onClick={logout}
+              className="flex flex-row items-center gap-1"
+            >
               <LogOut size={16} /> Logout
             </button>
           </>
         ) : (
-          <button className="nav-btn">
+          <button className="flex flex-row items-center gap-1">
             <LogIn size={16} /> Login
           </button>
         )}
-        <button className="nav-btn" onClick={toggleTheme}>
+        <button
+          className="flex flex-row items-center gap-1"
+          onClick={toggleTheme}
+        >
           {theme === "light" ? (
             <Sun fill="yellow" />
           ) : (

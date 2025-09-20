@@ -1,5 +1,5 @@
 export default function Home({ user, movies, error }) {
-  console.log(user, movies, error);
+  // console.log(user, movies, error);
 
   return (
     <div>
