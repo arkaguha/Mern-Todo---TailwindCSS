@@ -17,10 +17,8 @@ import Loader from "./components/Loader.jsx";
 // import Home from "./Pages/Home.jsx";
 import Log from "./components/Log.jsx";
 import LogProvider from "./contexts/LogContextProvider.jsx";
-import { injectSpeedInsights } from "@vercel/speed-insights";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {injectSpeedInsights()}
     <LogProvider>
       <AuthProvider>
         <BrowserRouter>

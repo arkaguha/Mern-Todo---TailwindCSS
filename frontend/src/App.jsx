@@ -7,7 +7,10 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 import { useNavigate } from "react-router-dom";
 import useAuth from "./contexts/UseAuth";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { injectSpeedInsights } from "@vercel/speed-insights";
+
 export default function App() {
+  injectSpeedInsights();
   // const [user, setUser] = useState(null); // decoded token payload
   const [movies, setMovies] = useState(null); // backend response
   const [error, setError] = useState(null);
