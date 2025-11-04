@@ -28,7 +28,13 @@ export default function Navbar() {
   const userName = isLoggedIn ? user.name : null;
 
   return (
-    <nav className="fixed w-screen top-0  bg-amber-200  flex justify-between px-6 py-4 items-center shadow-2xl shadow-amber-100">
+    <nav
+      className={
+        theme === "dark"
+          ? "fixed w-screen top-0  bg-amber-400 text-black flex justify-between px-6 py-4 items-center shadow-2xl shadow-amber-100"
+          : "fixed w-screen top-0  bg-amber-300  flex justify-between px-6 py-4 items-center shadow-2xl shadow-amber-100"
+      }
+    >
       <div className="">
         <h2 className="text-3xl ">todos</h2>
       </div>

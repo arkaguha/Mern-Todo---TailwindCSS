@@ -2,13 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import useAuth from "../contexts/UseAuth";
 import { useLoader } from "../contexts/UseLoader";
+import { useTheme } from "../contexts/ThemeContext";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export default function Todo({ todos, getTodos }) {
   const { token } = useAuth();
   const { showLoader, hideLoader } = useLoader();
-
+  const { theme } = useTheme();
   // Track which todo is currently being edited
   const [editTodoId, setEditTodoId] = useState(null);
 
@@ -93,7 +94,13 @@ export default function Todo({ todos, getTodos }) {
   };
 
   return (
-    <section className="bg-teal-100 min-h-screen p-6 mt-20 lg:grid lg:grid-cols-2 gap-3">
+    <section
+      className={
+        theme === "dark"
+          ? "bg-teal-400 min-h-screen p-6 mt-20 lg:grid lg:grid-cols-2 gap-3 text-black"
+          : "bg-teal-100 min-h-screen p-6 mt-20 lg:grid lg:grid-cols-2 gap-3 "
+      }
+    >
       {todos.length === 0 ? (
         <div className="text-center text-gray-700">
           <p className="text-lg font-medium">
@@ -104,7 +111,11 @@ export default function Todo({ todos, getTodos }) {
         todos.map((todo) => (
           <div key={todo._id} className="mb-4">
             <form
-              className="grid grid-cols-10 items-start gap-4 bg-white rounded-xl shadow-md p-4"
+              className={
+                theme === "dark"
+                  ? "grid grid-cols-10 items-start gap-4 bg-gray-700 text-amber-100 rounded-xl shadow-md p-4"
+                  : "grid grid-cols-10 items-start gap-4 bg-white rounded-xl shadow-md p-4"
+              }
               onSubmit={(e) => handleSave(e, todo._id)}
             >
               {/* Title + Description (70%) */}
@@ -144,7 +155,13 @@ export default function Todo({ todos, getTodos }) {
               {/* Actions (30%) */}
               <div className="col-span-2 flex flex-col items-center space-y-2">
                 {/* Completion checkbox */}
-                <label className="flex items-center gap-2 text-sm text-gray-700">
+                <label
+                  className={
+                    theme === "dark"
+                      ? "flex items-center gap-2 text-sm text-white"
+                      : "flex items-center gap-2 text-sm text-gray-700"
+                  }
+                >
                   <input
                     type="checkbox"
                     checked={todo.completion_status}
